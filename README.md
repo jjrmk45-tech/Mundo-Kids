@@ -3,9 +3,9 @@ Mundo Kids é uma loja de brinquedos online desenvolvida com Django, criada para
 
 Alunos:
 
-Gedson Eber Ribeiro Silva-(01770703)
-
 Julio Ferreira da Silva Neto-(01808964)
+
+Gedson Eber Ribeiro Silva-(01770703)
 
 Iarlley Oliveira França-(01812784)
 
