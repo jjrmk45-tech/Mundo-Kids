@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ brinquedo.nome }} - Mundo Kids</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="marca" href="{% url 'index' %}" aria-label="Mais Mundo Kids, página inicial">
+            <img src="{% static 'images/logo-mais-mundo-kids.png' %}" alt="Mais Mundo Kids">
+        </a>
+        <nav class="navegacao" aria-label="Navegação principal">
+            <a href="{% url 'index' %}">Início</a>
+            <a href="{% url 'catalogo' %}">Catálogo</a>
+        </nav>
+        <a class="link-admin" href="/admin/">Área da loja</a>
+    </header>
+
+    <main class="detalhe">
+        <div class="detalhe-imagem">
+            {% if brinquedo.imagem %}
+            {% static 'images/'|add:brinquedo.imagem as imagem_estatica %}
+            <img src="{{ imagem_estatica }}" alt="{{ brinquedo.nome }}">
+            {% else %}
+            <span class="imagem-placeholder" aria-hidden="true">🧸</span>
+            {% endif %}
+        </div>
+        <div class="detalhe-conteudo">
+            <span class="produto-categoria">{{ brinquedo.get_categoria_display }}</span>
+            <h1>{{ brinquedo.nome }}</h1>
+            {% if brinquedo.descricao %}
+            <p>{{ brinquedo.descricao }}</p>
+            {% endif %}
+            <p><strong>Preço:</strong> R$ {{ brinquedo.preco|floatformat:2 }}</p>
+            <p><strong>Estoque:</strong> {{ brinquedo.estoque }} unidades</p>
+            <p><strong>Faixa etária:</strong> {{ brinquedo.faixa_etaria|default:"Não informada" }}</p>
+            <a href="{% url 'catalogo' %}" class="botao">Voltar para o catálogo</a>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <div class="rodape-beneficios">
+            <span>Brincar e aprender</span>
+            <span>Um mundo de imaginação</span>
+        </div>
+        <a class="marca marca-rodape" href="{% url 'index' %}" aria-label="Mais Mundo Kids, página inicial">
+            <img src="{% static 'images/logo-mais-mundo-kids.png' %}" alt="Mais Mundo Kids">
+        </a>
+    </footer>
+</body>
+</html>

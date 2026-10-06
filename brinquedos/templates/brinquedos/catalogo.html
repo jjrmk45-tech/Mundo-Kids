@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pesquise e consulte os brinquedos cadastrados no Mundo Kids.">
+    <title>Catálogo de brinquedos | Mundo Kids</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="marca" href="{% url 'index' %}" aria-label="Mais Mundo Kids, página inicial">
+            <img src="{% static 'images/logo-mais-mundo-kids.png' %}" alt="Mais Mundo Kids">
+        </a>
+        <nav class="navegacao" aria-label="Navegação principal">
+            <a href="{% url 'index' %}#inicio">Início</a>
+            <a href="{% url 'index' %}#categorias">Categorias</a>
+            <a href="{% url 'index' %}#produtos">Brinquedos</a>
+            <a href="{% url 'catalogo' %}">Catálogo</a>
+        </nav>
+        <a class="link-admin" href="/admin/">Área da loja</a>
+    </header>
+
+    <main class="pagina-loja pagina-catalogo">
+        <section class="secao-produtos" id="produtos">
+            <div class="titulo-secao">
+                <div>
+                    <span class="sobretitulo">ENCONTRE SEU PRÓXIMO BRINQUEDO</span>
+                    {% if query %}
+                    <h1>Resultados para "{{ query }}"</h1>
+                    {% elif nome_categoria %}
+                    <h1>Brinquedos de {{ nome_categoria|lower }}</h1>
+                    {% else %}
+                    <h1>Todos os brinquedos</h1>
+                    {% endif %}
+                </div>
+                {% if query or categoria_selecionada %}
+                <a class="link-ver-todos" href="{% url 'catalogo' %}">Limpar filtros</a>
+                {% endif %}
+            </div>
+            <form class="busca busca-catalogo" action="{% url 'catalogo' %}#produtos" method="get" role="search">
+                <label class="visualmente-oculto" for="busca-brinquedos">Pesquisar brinquedos</label>
+                <input
+                    id="busca-brinquedos"
+                    type="search"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Pesquise por nome, descrição ou idade..."
+                >
+                {% if categoria_selecionada %}
+                <input type="hidden" name="categoria" value="{{ categoria_selecionada }}">
+                {% endif %}
+                <button type="submit">Buscar</button>
+            </form>
+            {% include 'brinquedos/_categorias.html' %}
+            {% if query %}
+            <p class="resumo-busca">{{ brinquedos|length }} brinquedo(s) encontrado(s).</p>
+            {% endif %}
+            {% include 'brinquedos/_cards.html' %}
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <div class="rodape-beneficios">
+            <span><span aria-hidden="true">✦</span> Brincar e aprender</span>
+            <span><span aria-hidden="true">♡</span> Um mundo de imaginação</span>
+            <span><span aria-hidden="true">★</span> Diversão para todos</span>
+        </div>
+        <a class="marca marca-rodape" href="{% url 'index' %}" aria-label="Mais Mundo Kids, página inicial">
+            <img src="{% static 'images/logo-mais-mundo-kids.png' %}" alt="Mais Mundo Kids">
+        </a>
+    </footer>
+</body>
+</html>

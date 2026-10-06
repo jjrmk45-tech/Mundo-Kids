@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title">
+  <title id="title">Brinquedos coloridos</title>
+  <rect width="1200" height="360" rx="24" fill="#fff3cd"/>
+  <circle cx="180" cy="182" r="92" fill="#ffca28"/>
+  <circle cx="180" cy="182" r="48" fill="#ef5350"/>
+  <path d="M180 90v184M88 182h184M115 117l130 130m0-130L115 247" stroke="#fff" stroke-width="12"/>
+  <rect x="394" y="115" width="190" height="150" rx="18" fill="#42a5f5"/>
+  <path d="M394 165h190M458 115v150M522 115v150" stroke="#fff" stroke-width="10"/>
+  <path d="M700 254V136l88-63 88 63v118z" fill="#66bb6a"/>
+  <path d="M758 254v-67h60v67" fill="#fff3cd"/>
+  <path d="M940 246c0-45 27-73 68-73s68 28 68 73v28H940z" fill="#ab47bc"/>
+  <circle cx="1008" cy="131" r="45" fill="#ffccbc"/>
+  <circle cx="992" cy="128" r="5" fill="#333"/>
+  <circle cx="1024" cy="128" r="5" fill="#333"/>
+  <path d="M994 148q14 14 28 0" fill="none" stroke="#333" stroke-width="5" stroke-linecap="round"/>
+  <path d="M80 310h1040" stroke="#ffb300" stroke-width="8" stroke-linecap="round"/>
+</svg>

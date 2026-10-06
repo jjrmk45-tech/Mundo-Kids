@@ -1,0 +1,57 @@
+{% load static %}
+<div class="galeria">
+    {% for brinquedo in brinquedos %}
+    <article class="produto">
+        <a class="produto-detalhe" href="{% url 'detalhe' brinquedo.id %}" aria-label="Ver {{ brinquedo.nome }}">
+            <div class="produto-imagem">
+                {% if brinquedo.imagem %}
+                {% static 'images/'|add:brinquedo.imagem as imagem_estatica %}
+                <img src="{{ imagem_estatica }}" alt="{{ brinquedo.nome }}">
+                {% else %}
+                <span class="imagem-placeholder" aria-hidden="true">
+                    {% if brinquedo.nome == 'Avião de Brinquedo' %}✈️
+                    {% elif brinquedo.nome == 'Bola Colorida' %}⚽
+                    {% elif brinquedo.nome == 'Boneca Fashion' %}🪆
+                    {% elif brinquedo.nome == 'Blocos de Montar' %}🧱
+                    {% elif brinquedo.nome == 'Urso de Pelúcia' %}🧸
+                    {% elif brinquedo.categoria == 'meninos' %}🚗
+                    {% elif brinquedo.categoria == 'meninas' %}🎀
+                    {% elif brinquedo.categoria == 'bebes' %}🧸
+                    {% elif brinquedo.categoria == 'educacao' %}🧩
+                    {% elif brinquedo.categoria == 'jogos' %}🎲
+                    {% elif brinquedo.categoria == 'ao_ar_livre' %}⚽
+                    {% else %}🎨{% endif %}
+                </span>
+                {% endif %}
+                {% if brinquedo.faixa_etaria %}
+                <span class="produto-idade">{{ brinquedo.faixa_etaria }}</span>
+                {% endif %}
+            </div>
+            <div class="produto-conteudo">
+                <span class="produto-categoria">{{ brinquedo.get_categoria_display }}</span>
+                <h3>{{ brinquedo.nome }}</h3>
+                {% if brinquedo.descricao %}
+                <p class="produto-descricao">{{ brinquedo.descricao|truncatewords:14 }}</p>
+                {% endif %}
+            </div>
+        </a>
+        <div class="produto-rodape">
+            <strong class="produto-preco">R$ {{ brinquedo.preco|floatformat:2 }}</strong>
+            {% if brinquedo.estoque > 0 %}
+            <span class="produto-estoque">Em estoque: {{ brinquedo.estoque }}</span>
+            {% else %}
+            <span class="produto-estoque produto-esgotado">Indisponível</span>
+            {% endif %}
+            <a class="botao-produto" href="{% url 'detalhe' brinquedo.id %}">Ver brinquedo</a>
+        </div>
+    </article>
+    {% empty %}
+    <p class="sem-produtos">
+        {% if query or categoria_selecionada %}
+        Não encontramos brinquedos com esses filtros. Experimente outra busca ou categoria.
+        {% else %}
+        Ainda não há brinquedos cadastrados.
+        {% endif %}
+    </p>
+    {% endfor %}
+</div>

@@ -1,0 +1,12 @@
+<div class="categorias-lista">
+    {% for item in categorias %}
+    <a
+        class="categoria-filtro{% if item.valor == categoria_selecionada %} categoria-ativa{% endif %}"
+        href="{% url url_listagem %}{% if item.valor %}?categoria={{ item.valor }}{% endif %}#produtos"
+        {% if item.valor == categoria_selecionada %}aria-current="page"{% endif %}
+    >
+        <span class="categoria-icone" aria-hidden="true">{{ item.icone }}</span>
+        <span>{{ item.nome }}</span>
+    </a>
+    {% endfor %}
+</div>
